@@ -12,6 +12,7 @@ const Button = props => {
 						id="b2"
 						checked
 						autoComplete="off"
+						onChange={props.function}
 					/>
 					<label id="label" className="btn btn-primary" htmlFor="b2">
 						{props.name}
@@ -23,7 +24,8 @@ const Button = props => {
 };
 
 Button.propTypes = {
-	name: PropTypes.string
+	name: PropTypes.string,
+	function: PropTypes.func
 };
 
 export default Button;

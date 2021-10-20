@@ -13,17 +13,52 @@ import Home from "./component/home.jsx";
 import Counter from "./component/counter.jsx";
 import Button from "./component/button.jsx";
 
-// let timerButton = document.getElementById("b2");
+let now = 12;
+let timeleft = 10;
 
-// timerButton.addEventListener("change", aqui);
+const clickHandler = e => {
+	runtimer(e);
+};
 
-// function aqui() {}
+function runtimer() {
+	let timer = new Timer(function() {
+		if (timeleft == 0) {
+			timer.stop();
+		}
+		timeleft -= 1;
+		now = timeleft + " seconds remaining";
+	}, 1000);
+}
 
-//render your react application
+function Timer(fn, t) {
+	var timerObj = setInterval(fn, t);
+
+	this.stop = function() {
+		if (timerObj) {
+			clearInterval(timerObj);
+			timerObj = null;
+		}
+		return this;
+	};
+
+	this.start = function() {
+		if (!timerObj) {
+			this.stop();
+			timerObj = setInterval(fn, t);
+		}
+		return this;
+	};
+
+	this.reset = function(newT = t) {
+		t = newT;
+		return this.stop().start();
+	};
+}
+
 ReactDOM.render(
 	<div>
-		<Counter />
-		<Button name="mula" />
+		<Counter time={timeleft} />
+		<Button name="Time Start" function={clickHandler} />
 	</div>,
 	document.querySelector("#app")
 );
