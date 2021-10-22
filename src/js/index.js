@@ -13,22 +13,11 @@ import Home from "./component/home.jsx";
 import Counter from "./component/counter.jsx";
 import Button from "./component/button.jsx";
 
-let now = 12;
 let timeleft = 10;
 
 const clickHandler = e => {
 	runtimer(e);
 };
-
-function runtimer() {
-	let timer = new Timer(function() {
-		if (timeleft == 0) {
-			timer.stop();
-		}
-		timeleft -= 1;
-		now = timeleft + " seconds remaining";
-	}, 1000);
-}
 
 function Timer(fn, t) {
 	var timerObj = setInterval(fn, t);
@@ -55,10 +44,30 @@ function Timer(fn, t) {
 	};
 }
 
+function runtimer(e) {
+	if (!e.checked) {
+		let timer = new Timer(function() {
+			if (timeleft == 0) {
+				timeleft = 10;
+			}
+			if (timeleft > 0) {
+				ReactDOM.render(
+					<Counter time={timeleft + " seconds remaining"} />,
+					document.querySelector("#app")
+				);
+				timeleft -= 1;
+			}
+			if (timeleft == -1) {
+				timer.stop();
+			}
+		}, 1000);
+	}
+	// else {
+	// 	timeleft = -1;
+	// }
+}
+
 ReactDOM.render(
-	<div>
-		<Counter time={timeleft} />
-		<Button name="Time Start" function={clickHandler} />
-	</div>,
+	<Button name="Time Start" function={clickHandler} />,
 	document.querySelector("#app")
 );
