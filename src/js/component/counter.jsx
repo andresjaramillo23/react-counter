@@ -6,48 +6,6 @@ const Counter = props => {
 	const [tiempo, setTiempo] = useState("");
 	const [parar, setParar] = useState(false);
 	let runner = 10;
-	let id = setInterval(runtimer, 1000);
-	//let timer;
-
-	function Timer(fn, t) {
-		var timerObj = setInterval(fn, t);
-
-		this.stop = function() {
-			if (timerObj) {
-				clearInterval(timerObj);
-				timerObj = null;
-			}
-			return this;
-		};
-
-		this.start = function() {
-			if (!timerObj) {
-				this.stop();
-				timerObj = setInterval(fn, t);
-			}
-			return this;
-		};
-
-		this.reset = function(newT = t) {
-			t = newT;
-			return this.stop().start();
-		};
-	}
-
-	// const clickHandler = e => {
-	// 	runtimer(e);
-	// };
-
-	// function runtimer(e) {
-	// 	if (!e.checked) {
-	// 		setIsRunning(true);
-	// 		setButtonState("Stop Timer");
-	// 	} else {
-	// 		setIsRunning(false);
-	// 		setButtonState("Start Timer");
-	// 		setTimeleft(-1);
-	// 	}
-	// }
 
 	function runtimer() {
 		if (isRunning) {
@@ -70,10 +28,9 @@ const Counter = props => {
 				}
 			}, 1000);
 		} else {
-			setButtonState("MULA");
+			setButtonState("Start Timer");
 			setIsRunning(true);
 			runner = -1;
-			//timer.stop();
 			setParar(true);
 		}
 	}
@@ -114,5 +71,31 @@ const Counter = props => {
 		</>
 	);
 };
+
+function Timer(fn, t) {
+	var timerObj = setInterval(fn, t);
+
+	this.stop = function() {
+		if (timerObj) {
+			clearInterval(timerObj);
+			timerObj = null;
+		}
+		return this;
+	};
+
+	this.start = function() {
+		if (!timerObj) {
+			this.stop();
+			timerObj = setInterval(fn, t);
+		}
+		return this;
+	};
+
+	this.reset = function(newT = t) {
+		t = newT;
+		return this.stop().start();
+	};
+}
+
 
 export default Counter;
