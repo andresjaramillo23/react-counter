@@ -1,6 +1,6 @@
 //import React from "react";
 import ReactDOM from "react-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 //include bootstrap npm library into the bundle
 import "bootstrap";
@@ -9,9 +9,7 @@ import "bootstrap";
 import "../styles/index.scss";
 
 //import your own components
-import Home from "./component/home.jsx";
 import Counter from "./component/counter.jsx";
-import Button from "./component/button.jsx";
 
 ReactDOM.render(
 	<>
